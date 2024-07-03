@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="SummerPractice.TextSlider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:SummerPractice"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="300">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="{Binding Label}" Style="{StaticResource Header-3}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="65" />
+            </Grid.ColumnDefinitions>
+
+            <Slider Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+            <xctk:DoubleUpDown Grid.Column="1" Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </StackPanel>
+</UserControl>

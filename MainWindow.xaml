@@ -3,10 +3,108 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SummerPractice"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d"        
+        Title="Распространение инфекции" Height="800" Width="1200">
     <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="Параметры" Style="{StaticResource Header-1}" />
+                <TextBlock Text="Поле" Style="{StaticResource Header-2}" />
+                <Grid Width="200" HorizontalAlignment="Left" Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" Margin="0 0 5 0">
+                        <TextBlock Text="Ширина" Style="{StaticResource Header-3}" />
+                        <xctk:IntegerUpDown Value="{Binding FieldWidth}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <TextBlock Text="Высота" Style="{StaticResource Header-3}" />
+                        <xctk:IntegerUpDown Value="{Binding FieldHeight}" />
+                    </StackPanel>
+                </Grid>
+                <TextBlock Text="Инфекция" Style="{StaticResource Header-2}" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Радиус распространения" Style="{StaticResource Header-3}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="65" />
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Value="{Binding SpreadRadius, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding SpreadRadius, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Кол-во контактов в день" Style="{StaticResource Header-3}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="65" />
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Value="{Binding ContactsPerDay, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding ContactsPerDay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Вероятность заражения" Style="{StaticResource Header-3}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="65" />
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Value="{Binding InfectionProbability, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding InfectionProbability, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Вероятность смерти" Style="{StaticResource Header-3}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="65" />
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Value="{Binding MortalityProbability, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding MortalityProbability, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <Grid DataContext="{Binding Field}">
+                    <ItemsControl ItemsSource="{Binding Grid}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="{Binding FieldWidth}" Rows="{Binding FieldHeight}"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <!--<Border Width="20" Height="20" Background="{Binding Status, Converter={StaticResource HealthStatusToColorConverter}}"/>-->
+                                <Border Width="20" Height="20" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Сброс" Command="{Binding ResetCommand}" Style="{StaticResource ControlButton}" />
+                    <Button Content="Запуск" Command="{Binding PlayCommand}" Style="{StaticResource ControlButton}" />
+                    <Button Content="Шаг" Command="{Binding StepCommand}" Style="{StaticResource ControlButton}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
