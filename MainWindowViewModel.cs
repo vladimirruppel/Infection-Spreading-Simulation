@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SummerPractice
 {
-    class MainWindowViewModel
+    class MainWindowViewModel : ViewModelBase
     {
 
     }
