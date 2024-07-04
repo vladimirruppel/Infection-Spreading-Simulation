@@ -84,24 +84,26 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1">
-                <Grid DataContext="{Binding Field}">
-                    <ItemsControl ItemsSource="{Binding Grid}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="{Binding FieldWidth}" Rows="{Binding FieldHeight}"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <!--<Border Width="20" Height="20" Background="{Binding Status, Converter={StaticResource HealthStatusToColorConverter}}"/>-->
-                                <Border Width="20" Height="20" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                <Grid Width="{Binding GridWidth}" Height="{Binding GridHeight}">
+                    <Grid DataContext="{Binding Field}">
+                        <ItemsControl ItemsSource="{Binding Grid}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="{Binding ColumnsCount}" Rows="{Binding RowsCount}"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <!--<Border Width="20" Height="20" Background="{Binding Status, Converter={StaticResource HealthStatusToColorConverter}}"/>-->
+                                    <Border Width="20" Height="20" Background="Black" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
                 </Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Сброс" Command="{Binding ResetCommand}" Style="{StaticResource ControlButton}" />
-                    <Button Content="Запуск" Command="{Binding PlayCommand}" Style="{StaticResource ControlButton}" />
+                    <Button Content="Старт" Command="{Binding StartCommand}" Style="{StaticResource ControlButton}" />
                     <Button Content="Шаг" Command="{Binding StepCommand}" Style="{StaticResource ControlButton}" />
                 </StackPanel>
             </StackPanel>
