@@ -15,6 +15,8 @@ namespace SummerPractice
             }
         }
 
+        private Epidemic epidemic;
+
         private int _fieldWidth = 20;
         public int FieldWidth
         {
@@ -50,6 +52,7 @@ namespace SummerPractice
             {
                 _spreadRadius = value;
                 OnPropertyChanged();
+                epidemic.SetSpreadRadius(SpreadRadius);
             }
         }
 
@@ -61,6 +64,7 @@ namespace SummerPractice
             {
                 _contactsPerDay = value;
                 OnPropertyChanged();
+                epidemic.SetContactsPerDay(ContactsPerDay);
             }
         }
 
@@ -72,6 +76,7 @@ namespace SummerPractice
             {
                 _infectionProbability = value;
                 OnPropertyChanged();
+                epidemic.SetInfectionProbability(InfectionProbability);
             }
         }
 
@@ -83,12 +88,13 @@ namespace SummerPractice
             {
                 _mortalityProbability = value;
                 OnPropertyChanged();
+                epidemic.SetMortalityProbability(MortalityProbability);
             }
         }
 
         public MainWindowViewModel()
         {
-            Field = new Field(FieldWidth, FieldHeight);
+            Reset();
         }
 
         public RelayCommand ResetCommand => new RelayCommand(execute => Reset());
@@ -97,7 +103,8 @@ namespace SummerPractice
 
         private void Reset()
         {
-            
+            Field = new Field(FieldWidth, FieldHeight);
+            epidemic = new Epidemic(SpreadRadius, ContactsPerDay, InfectionProbability, MortalityProbability);
         }
         private void Start()
         {
@@ -105,7 +112,8 @@ namespace SummerPractice
         }
         private void Step() 
         {
-            
+            epidemic.SpreadInfection(Field);
+            OnPropertyChanged(nameof(Field));
         }
     }
 }
