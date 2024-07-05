@@ -15,6 +15,17 @@ namespace SummerPractice
             }
         }
 
+        private bool _canChangeFieldDimensions = true;
+        public bool CanChangeFieldDimensions
+        {
+            get => _canChangeFieldDimensions;
+            set
+            {
+                _canChangeFieldDimensions = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Epidemic epidemic;
 
         private int _fieldWidth = 20;
@@ -80,6 +91,32 @@ namespace SummerPractice
             }
         }
 
+        private int _incubationPeriod;
+        public int IncubationPeriod
+        {
+            get => _incubationPeriod;
+            set
+            {
+                _incubationPeriod = value;
+                OnPropertyChanged();
+                Field.UpdateIncubationPeriod(value);
+                OnPropertyChanged(nameof(Field));
+            }
+        }
+
+        private int _symptomsDuration;
+        public int SymptomsDuration
+        {
+            get => _symptomsDuration;
+            set
+            {
+                _symptomsDuration = value;
+                OnPropertyChanged();
+                Field.UpdateSymptomsDuration(value);
+                OnPropertyChanged(nameof(Field));
+            }
+        }
+
         private double _mortalityProbability;
         public double MortalityProbability
         {
@@ -95,6 +132,15 @@ namespace SummerPractice
         public MainWindowViewModel()
         {
             Reset();
+
+            SpreadRadius = 5;
+            ContactsPerDay = 10;
+            InfectionProbability = 40;
+            IncubationPeriod = 5;
+            SymptomsDuration = 6;
+            MortalityProbability = 20;
+
+            Reset();
         }
 
         public RelayCommand ResetCommand => new RelayCommand(execute => Reset());
@@ -103,8 +149,9 @@ namespace SummerPractice
 
         private void Reset()
         {
-            Field = new Field(FieldWidth, FieldHeight);
+            Field = new Field(FieldWidth, FieldHeight, IncubationPeriod, SymptomsDuration);
             epidemic = new Epidemic(SpreadRadius, ContactsPerDay, InfectionProbability, MortalityProbability);
+            CanChangeFieldDimensions = true;
         }
         private void Start()
         {
@@ -113,6 +160,7 @@ namespace SummerPractice
         private void Step() 
         {
             epidemic.SpreadInfection(Field);
+            CanChangeFieldDimensions = false;
             OnPropertyChanged(nameof(Field));
         }
     }

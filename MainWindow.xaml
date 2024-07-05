@@ -73,6 +73,30 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Инкубационный период" Style="{StaticResource Header-3}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="65" />
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Value="{Binding IncubationPeriod, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
+                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding IncubationPeriod, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Длительность симптомов" Style="{StaticResource Header-3}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="65" />
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Value="{Binding SymptomsDuration, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
+                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding SymptomsDuration, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
                     <TextBlock Text="Вероятность смерти" Style="{StaticResource Header-3}" />
                     <Grid>
                         <Grid.ColumnDefinitions>

@@ -35,21 +35,27 @@
         public void SpreadInfection(Field field)
         {
             // заражение небольных соседей в радиусе распространения
-            List<Person> infectedPeople = field.Grid.Where(person => person.Status == HealthStatus.Infected).ToList();
+            List<Person> infectedPeople = field.Grid
+                .Where(person => person.Status == HealthStatus.Infected || person.Status == HealthStatus.Sick)
+                .ToList();
             foreach (Person infectedPerson in infectedPeople)
             {
                 List<Person> neighbors = GetNeighbors(field, infectedPerson);
                 foreach (Person neighbor in neighbors) 
                 {
-                    double neighborImmunityValue = StaticMethods.GetRandomDouble(0, 100);
-                    // если иммунитет соседа сильнее (больше по значению) вероятности заражения
-                    if (neighborImmunityValue <= infectionProbability) // то заразить соседа
-                        neighbor.Infect();
+                    // заразить здоровых соседей с какой-то вероятностью
+                    if (neighbor.Status == HealthStatus.Healthy) 
+                    {
+                        double neighborImmunityValue = StaticMethods.GetRandomDouble(0, 100);
+                        // если иммунитет соседа сильнее (больше по значению) вероятности заражения
+                        if (neighborImmunityValue <= infectionProbability) // то заразить соседа
+                            neighbor.Infect();
+                    }
                 }
             }
 
             // воздействие инфекции на зараженных людей (отнять очки жизней)
-            infectedPeople.ForEach(infectedPerson => infectedPerson.InfectionExposure());
+            infectedPeople.ForEach(infectedPerson => infectedPerson.InfectionExposure(mortalityProbability));
         }
 
         // функция, в рандомном порядке получающая соседей указанного человека, учитывающая радиус распространения и кол-во контактов в день

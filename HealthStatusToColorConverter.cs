@@ -12,11 +12,15 @@ namespace SummerPractice
                 case HealthStatus.Healthy:
                     return Brushes.White;
                 case HealthStatus.Infected:
+                    return Brushes.IndianRed;
+                case HealthStatus.Sick:
                     return Brushes.Red;
+                case HealthStatus.Recovered:
+                    return Brushes.Blue;
                 case HealthStatus.Dead:
                     return Brushes.Black;
                 default:
-                    return Brushes.Blue;
+                    return Brushes.Yellow;
             }
         }
 
