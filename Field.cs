@@ -44,12 +44,12 @@ namespace SummerPractice
                 .ForEach(person => person.SetIncubationPeriod(incubationPeriod));
         }
 
-        public void UpdateSymptomsDuration(int symptomsDuration)
+        public void UpdateSymptomsDuration(int symptomsDuration, double mortalityProbability)
         {
             Grid
                 .Where(person => person.Status != HealthStatus.Dead || person.Status != HealthStatus.Recovered)
                 .ToList()
-                .ForEach(person => person.SetSymptomsDuration(symptomsDuration));
+                .ForEach(person => person.SetSymptomsDuration(symptomsDuration, mortalityProbability));
         }
     }
 }

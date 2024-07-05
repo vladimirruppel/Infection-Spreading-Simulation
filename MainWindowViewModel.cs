@@ -112,7 +112,7 @@ namespace SummerPractice
             {
                 _symptomsDuration = value;
                 OnPropertyChanged();
-                Field.UpdateSymptomsDuration(value);
+                Field.UpdateSymptomsDuration(value, MortalityProbability);
                 OnPropertyChanged(nameof(Field));
             }
         }

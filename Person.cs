@@ -25,6 +25,7 @@ namespace SummerPractice
         private int daysToGetSick;
         private int daysToGetRecovered;
 
+        private int deathCheckDay;
         private bool triedToBeDead = false;
 
         public Person(int x, int y, int incubationPeriod, int symptomsDuration)
@@ -33,6 +34,7 @@ namespace SummerPractice
             Y = y;
             daysToGetSick = this.incubationPeriod = incubationPeriod;
             daysToGetRecovered = this.symptomsDuration = symptomsDuration;
+            deathCheckDay = StaticMethods.GetRandomInt(1, 7);
         }
 
         public void SetIncubationPeriod(int incubationPeriod)
@@ -49,7 +51,7 @@ namespace SummerPractice
             this.incubationPeriod = incubationPeriod;
         }
 
-        public void SetSymptomsDuration(int symptomsDuration)
+        public void SetSymptomsDuration(int symptomsDuration, double mortalityProbability)
         { 
             int oldSymptomsDuration = this.symptomsDuration;
             int diff = oldSymptomsDuration - symptomsDuration;
@@ -58,7 +60,10 @@ namespace SummerPractice
             else if (diff < 0)
             {
                 daysToGetRecovered = 0;
-                Recover();
+                if (!triedToBeDead)
+                    CheckDeath(mortalityProbability);
+                if (Status != HealthStatus.Dead)
+                    Recover();
             }
             this.symptomsDuration = symptomsDuration;
         }
@@ -83,6 +88,18 @@ namespace SummerPractice
             Status = HealthStatus.Dead;
         }
 
+        // человек умирает с определенной вероятностью
+        private void CheckDeath(double mortalityProbability)
+        {
+            double healthValue = StaticMethods.GetRandomDouble(0, 100);
+            if (healthValue <= mortalityProbability)
+            {
+                Die();
+            }
+
+            triedToBeDead = true;
+        }
+
         public void InfectionExposure(double mortalityProbability)
         {
             if (Status == HealthStatus.Infected)
@@ -92,20 +109,13 @@ namespace SummerPractice
             }
             if (Status == HealthStatus.Sick)
             {
-                if (!triedToBeDead)
+                int thisDayNumber = symptomsDuration - daysToGetRecovered;
+                if (thisDayNumber == deathCheckDay)
                 {
-                    double healthValue = StaticMethods.GetRandomDouble(0, 100);
-                    if (healthValue <= mortalityProbability)
-                    {
-                        Die();
+                    CheckDeath(mortalityProbability);
+                    if (Status == HealthStatus.Dead)
                         return;
-                    }
-                    else
-                    {
-                        triedToBeDead = true;
-                    }
                 }
-
                 if ((--daysToGetRecovered) == 0)
                     Recover();
             }
