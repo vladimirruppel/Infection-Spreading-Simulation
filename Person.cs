@@ -5,7 +5,7 @@ namespace SummerPractice
 {
     public enum HealthStatus { Healthy, Infected, Sick, Recovered, Dead }
 
-    public class Person : INotifyPropertyChanged
+    public class Person : PropertyChangedBase
     {
         private HealthStatus _status = HealthStatus.Healthy;
         public HealthStatus Status
@@ -125,12 +125,6 @@ namespace SummerPractice
                 if ((--daysToGetRecovered) == 0)
                     Recover();
             }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

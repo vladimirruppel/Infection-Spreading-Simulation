@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SummerPractice
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class PropertyChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

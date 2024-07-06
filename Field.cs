@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SummerPractice
+﻿namespace SummerPractice
 {
-    public class Field : INotifyPropertyChanged
+    public class Field : PropertyChangedBase
     {
         private Person[] _grid;
         public Person[] Grid
@@ -162,10 +154,9 @@ namespace SummerPractice
                 .ForEach(person => person.SetSymptomsDuration(symptomsDuration, mortalityProbability));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public bool AreThereSickPeople()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return Grid.Where(person => person.Status == HealthStatus.Infected || person.Status == HealthStatus.Sick).Count() > 0;
         }
     }
 }

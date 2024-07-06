@@ -1,8 +1,9 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 
 namespace SummerPractice
 {
-    class MainWindowViewModel : ViewModelBase
+    class MainWindowViewModel : PropertyChangedBase
     {
         private Field _field;
         public Field Field
@@ -16,6 +17,7 @@ namespace SummerPractice
         }
 
         private Epidemic epidemic;
+        private DispatcherTimer timer;
 
         private int _fieldWidth = 20;
         public int FieldWidth
@@ -153,15 +155,26 @@ namespace SummerPractice
         {
             Field = new Field(FieldWidth, FieldHeight, IncubationPeriod, SymptomsDuration);
             epidemic = new Epidemic(SpreadRadius, ContactsPerDay, InfectionProbability, MortalityProbability);
+            timer?.Stop();
         }
         private void Start()
         {
-            
+            if (timer == null)
+            {
+                timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromSeconds(0.2); // Интервал времени между шагами
+                timer.Tick += (sender, args) => Step();
+            }
+
+            timer.Start();
         }
         private void Step() 
         {
             epidemic.SpreadInfection(Field);
             OnPropertyChanged(nameof(Field));
+
+            if (!Field.AreThereSickPeople())
+                timer?.Stop();
         }
 
         private void Test()
