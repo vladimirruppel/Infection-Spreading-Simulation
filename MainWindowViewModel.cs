@@ -133,7 +133,8 @@ namespace SummerPractice
 
         public MainWindowViewModel()
         {
-            Reset();
+            Field = new Field(FieldWidth, FieldHeight, IncubationPeriod, SymptomsDuration);
+            epidemic = new Epidemic(SpreadRadius, ContactsPerDay, InfectionProbability, MortalityProbability);
 
             SpreadRadius = 5;
             ContactsPerDay = 10;
@@ -149,8 +150,6 @@ namespace SummerPractice
         public RelayCommand StartCommand => new RelayCommand(execute => Start());
         public RelayCommand StepCommand => new RelayCommand(execute => Step());
 
-        public RelayCommand TestCommand => new RelayCommand(execute => Test());
-
         private void Reset()
         {
             Field = new Field(FieldWidth, FieldHeight, IncubationPeriod, SymptomsDuration);
@@ -162,7 +161,7 @@ namespace SummerPractice
             if (timer == null)
             {
                 timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromSeconds(0.2); // Интервал времени между шагами
+                timer.Interval = TimeSpan.FromSeconds(0.17); // Интервал времени между шагами
                 timer.Tick += (sender, args) => Step();
             }
 
@@ -175,12 +174,6 @@ namespace SummerPractice
 
             if (!Field.AreThereSickPeople())
                 timer?.Stop();
-        }
-
-        private void Test()
-        {
-            FieldWidth = 10;
-            FieldHeight = 10;
         }
     }
 }

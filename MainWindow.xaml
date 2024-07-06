@@ -6,7 +6,8 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SummerPractice"
         mc:Ignorable="d"        
-        Title="Распространение инфекции" Height="800" Width="1200">
+        Title="Распространение инфекции" Height="840" Width="1200" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:HealthStatusToColorConverter x:Key="HealthStatusToColorConverter" />
     </Window.Resources>
@@ -28,11 +29,11 @@
 
                     <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                         <TextBlock Text="Ширина" Style="{StaticResource Header-3}" />
-                        <xctk:IntegerUpDown Value="{Binding FieldWidth}" Minimum="1" Maximum="50" />
+                        <xctk:IntegerUpDown Value="{Binding FieldWidth}" Minimum="1" Maximum="40" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <TextBlock Text="Высота" Style="{StaticResource Header-3}" />
-                        <xctk:IntegerUpDown Value="{Binding FieldHeight}" Minimum="1" Maximum="50" />
+                        <xctk:IntegerUpDown Value="{Binding FieldHeight}" Minimum="1" Maximum="35" />
                     </StackPanel>
                 </Grid>
                 <TextBlock Text="Инфекция" Style="{StaticResource Header-2}" />
@@ -111,7 +112,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1">
-                <Grid Width="{Binding GridWidth}" Height="{Binding GridHeight}">
+                <Grid Width="{Binding GridWidth}" Height="{Binding GridHeight}" Margin="0,20">
                     <Grid DataContext="{Binding Field}">
                         <ItemsControl ItemsSource="{Binding Grid}">
                             <ItemsControl.ItemsPanel>
@@ -132,8 +133,6 @@
                     <Button Content="Сброс" Command="{Binding ResetCommand}" Style="{StaticResource ControlButton}" />
                     <Button Content="Старт" Command="{Binding StartCommand}" Style="{StaticResource ControlButton}" />
                     <Button Content="Шаг" Command="{Binding StepCommand}" Style="{StaticResource ControlButton}" />
-
-                    <Button Content="Поле 10х10" Command="{Binding TestCommand}" Style="{StaticResource ControlButton}" />
                 </StackPanel>
             </StackPanel>
         </Grid>

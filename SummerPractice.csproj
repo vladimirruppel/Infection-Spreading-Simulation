@@ -6,11 +6,24 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Virus_green.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Virus_green.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Virus_green.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
     <PackageReference Include="Syncfusion.Shared.WPF" Version="26.1.40" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Virus_green.ico" />
   </ItemGroup>
 
 </Project>
