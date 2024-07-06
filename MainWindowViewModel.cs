@@ -28,6 +28,8 @@ namespace SummerPractice
                 OnPropertyChanged(nameof(Field));
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(GridWidth));
+                OnPropertyChanged(nameof(MaxSpreadRadius));
+                OnPropertyChanged(nameof(MaxContactsPerDay));
             }
         }
 
@@ -42,6 +44,8 @@ namespace SummerPractice
                 OnPropertyChanged(nameof(Field));
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(GridHeight));
+                OnPropertyChanged(nameof(MaxSpreadRadius));
+                OnPropertyChanged(nameof(MaxContactsPerDay));
             }
         }
 
@@ -122,6 +126,9 @@ namespace SummerPractice
             }
         }
 
+        public int MaxSpreadRadius => Math.Max(FieldWidth, FieldHeight);
+        public int MaxContactsPerDay => FieldWidth * FieldHeight;
+
         public MainWindowViewModel()
         {
             Reset();
@@ -160,7 +167,7 @@ namespace SummerPractice
         private void Test()
         {
             FieldWidth = 10;
-            //FieldHeight = 10;
+            FieldHeight = 10;
         }
     }
 }

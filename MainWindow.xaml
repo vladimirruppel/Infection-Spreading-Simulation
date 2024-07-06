@@ -44,8 +44,8 @@
                             <ColumnDefinition Width="65" />
                         </Grid.ColumnDefinitions>
 
-                        <Slider Value="{Binding SpreadRadius, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
-                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding SpreadRadius, UpdateSourceTrigger=PropertyChanged}" />
+                        <Slider Value="{Binding SpreadRadius, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxSpreadRadius}" />
+                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding SpreadRadius, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxSpreadRadius}" />
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
@@ -56,24 +56,24 @@
                             <ColumnDefinition Width="65" />
                         </Grid.ColumnDefinitions>
 
-                        <Slider Value="{Binding ContactsPerDay, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
-                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding ContactsPerDay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Slider Value="{Binding ContactsPerDay, UpdateSourceTrigger=PropertyChanged}" Maximum="50" />
+                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding ContactsPerDay, UpdateSourceTrigger=PropertyChanged}" Maximum="50" />
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Вероятность заражения" Style="{StaticResource Header-3}" />
+                    <TextBlock Text="Вероятность заражения, %" Style="{StaticResource Header-3}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="65" />
                         </Grid.ColumnDefinitions>
 
-                        <Slider Value="{Binding InfectionProbability, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
-                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding InfectionProbability, UpdateSourceTrigger=PropertyChanged}" />
+                        <Slider Value="{Binding InfectionProbability, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="100" />
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding InfectionProbability, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="100" />
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Инкубационный период" Style="{StaticResource Header-3}" />
+                    <TextBlock Text="Инкубационный период, дней" Style="{StaticResource Header-3}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -81,11 +81,11 @@
                         </Grid.ColumnDefinitions>
 
                         <Slider Value="{Binding IncubationPeriod, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
-                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding IncubationPeriod, UpdateSourceTrigger=PropertyChanged}" />
+                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding IncubationPeriod, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Длительность симптомов" Style="{StaticResource Header-3}" />
+                    <TextBlock Text="Длительность симптомов, дней" Style="{StaticResource Header-3}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -93,7 +93,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Slider Value="{Binding SymptomsDuration, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
-                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding SymptomsDuration, UpdateSourceTrigger=PropertyChanged}" />
+                        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding SymptomsDuration, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
@@ -104,8 +104,8 @@
                             <ColumnDefinition Width="65" />
                         </Grid.ColumnDefinitions>
 
-                        <Slider Value="{Binding MortalityProbability, UpdateSourceTrigger=PropertyChanged}" Maximum="100" />
-                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding MortalityProbability, UpdateSourceTrigger=PropertyChanged}" />
+                        <Slider Value="{Binding MortalityProbability, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="100" />
+                        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding MortalityProbability, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="100" />
                     </Grid>
                 </StackPanel>
             </StackPanel>
