@@ -40,13 +40,16 @@ namespace SummerPractice
         public void SetIncubationPeriod(int incubationPeriod)
         {
             int oldIncubationPeriod = this.incubationPeriod;
-            int diff = oldIncubationPeriod - incubationPeriod;
+            int diff = incubationPeriod - oldIncubationPeriod;
             if (diff > 0)
                 daysToGetSick += diff;
             else if (diff < 0)
             {
-                daysToGetSick = 0;
-                GetSick();
+                if (Status == HealthStatus.Infected)
+                {
+                    daysToGetSick = 0;
+                    GetSick();
+                }
             }
             this.incubationPeriod = incubationPeriod;
         }
@@ -54,16 +57,19 @@ namespace SummerPractice
         public void SetSymptomsDuration(int symptomsDuration, double mortalityProbability)
         { 
             int oldSymptomsDuration = this.symptomsDuration;
-            int diff = oldSymptomsDuration - symptomsDuration;
+            int diff = symptomsDuration - oldSymptomsDuration;
             if (diff > 0)
                 daysToGetRecovered += diff;
             else if (diff < 0)
             {
-                daysToGetRecovered = 0;
-                if (!triedToBeDead)
-                    CheckDeath(mortalityProbability);
-                if (Status != HealthStatus.Dead)
-                    Recover();
+                if (Status == HealthStatus.Sick)
+                {
+                    daysToGetRecovered = 0;
+                    if (!triedToBeDead)
+                        CheckDeath(mortalityProbability);
+                    if (Status != HealthStatus.Dead)
+                        Recover();
+                }
             }
             this.symptomsDuration = symptomsDuration;
         }
