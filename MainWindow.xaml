@@ -28,11 +28,11 @@
 
                     <StackPanel Orientation="Vertical" Margin="0 0 5 0">
                         <TextBlock Text="Ширина" Style="{StaticResource Header-3}" />
-                        <xctk:IntegerUpDown Value="{Binding FieldWidth}" />
+                        <xctk:IntegerUpDown Value="{Binding FieldWidth}" Minimum="1" Maximum="50" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <TextBlock Text="Высота" Style="{StaticResource Header-3}" />
-                        <xctk:IntegerUpDown Value="{Binding FieldHeight}" />
+                        <xctk:IntegerUpDown Value="{Binding FieldHeight}" Minimum="1" Maximum="50" />
                     </StackPanel>
                 </Grid>
                 <TextBlock Text="Инфекция" Style="{StaticResource Header-2}" />
@@ -123,7 +123,6 @@
                                 <DataTemplate>
                                     <Border BorderThickness="2" BorderBrush="LightGray" Width="18" Height="18" 
                                             Background="{Binding Status, Converter={StaticResource HealthStatusToColorConverter}}"/>
-                                    <!--<Border Width="20" Height="20" Background="Black" />-->
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -133,6 +132,8 @@
                     <Button Content="Сброс" Command="{Binding ResetCommand}" Style="{StaticResource ControlButton}" />
                     <Button Content="Старт" Command="{Binding StartCommand}" Style="{StaticResource ControlButton}" />
                     <Button Content="Шаг" Command="{Binding StepCommand}" Style="{StaticResource ControlButton}" />
+
+                    <Button Content="Поле 10х10" Command="{Binding TestCommand}" Style="{StaticResource ControlButton}" />
                 </StackPanel>
             </StackPanel>
         </Grid>

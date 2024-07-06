@@ -15,17 +15,6 @@ namespace SummerPractice
             }
         }
 
-        private bool _canChangeFieldDimensions = true;
-        public bool CanChangeFieldDimensions
-        {
-            get => _canChangeFieldDimensions;
-            set
-            {
-                _canChangeFieldDimensions = value;
-                OnPropertyChanged();
-            }
-        }
-
         private Epidemic epidemic;
 
         private int _fieldWidth = 20;
@@ -35,6 +24,8 @@ namespace SummerPractice
             set
             {
                 _fieldWidth = value;
+                Field.SetColumnsCount(value, IncubationPeriod, SymptomsDuration);
+                OnPropertyChanged(nameof(Field));
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(GridWidth));
             }
@@ -47,6 +38,8 @@ namespace SummerPractice
             set
             {
                 _fieldHeight = value;
+                Field.SetRowsCount(value, IncubationPeriod, SymptomsDuration);
+                OnPropertyChanged(nameof(Field));
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(GridHeight));
             }
@@ -147,11 +140,12 @@ namespace SummerPractice
         public RelayCommand StartCommand => new RelayCommand(execute => Start());
         public RelayCommand StepCommand => new RelayCommand(execute => Step());
 
+        public RelayCommand TestCommand => new RelayCommand(execute => Test());
+
         private void Reset()
         {
             Field = new Field(FieldWidth, FieldHeight, IncubationPeriod, SymptomsDuration);
             epidemic = new Epidemic(SpreadRadius, ContactsPerDay, InfectionProbability, MortalityProbability);
-            CanChangeFieldDimensions = true;
         }
         private void Start()
         {
@@ -160,8 +154,13 @@ namespace SummerPractice
         private void Step() 
         {
             epidemic.SpreadInfection(Field);
-            CanChangeFieldDimensions = false;
             OnPropertyChanged(nameof(Field));
+        }
+
+        private void Test()
+        {
+            FieldWidth = 10;
+            //FieldHeight = 10;
         }
     }
 }
