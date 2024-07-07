@@ -136,12 +136,12 @@ namespace SummerPractice
             Field = new Field(FieldWidth, FieldHeight, IncubationPeriod, SymptomsDuration);
             epidemic = new Epidemic(SpreadRadius, ContactsPerDay, InfectionProbability, MortalityProbability);
 
-            SpreadRadius = 5;
-            ContactsPerDay = 10;
-            InfectionProbability = 40;
+            SpreadRadius = 3;
+            ContactsPerDay = 8;
+            InfectionProbability = 33;
             IncubationPeriod = 5;
             SymptomsDuration = 6;
-            MortalityProbability = 20;
+            MortalityProbability = 3;
 
             Reset();
         }

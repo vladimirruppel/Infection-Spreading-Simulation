@@ -98,7 +98,7 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Вероятность смерти" Style="{StaticResource Header-3}" />
+                    <TextBlock Text="Вероятность смерти, %" Style="{StaticResource Header-3}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
